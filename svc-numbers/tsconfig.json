@@ -6,16 +6,12 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "rootDir": "src/app/",
         "outDir": "dist/",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
+        "baseUrl": "./node_modules",
         "rootDirs": [
           "src/app",
           "src/typings"
         ]
-
     },
     "exclude": [
         "node_modules",
