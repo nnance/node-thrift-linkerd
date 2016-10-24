@@ -57,7 +57,7 @@ const server = new hapi.Server();
 const graphqlPort = 3000;
 
 server.connection({
-  host: "localhost",
+  host: "0.0.0.0",
   port: graphqlPort,
 });
 

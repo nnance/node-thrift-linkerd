@@ -1,0 +1,9 @@
+admin:
+  port: 9990
+
+routers:
+- protocol: http
+  baseDtab: /http => /$/inet/127.1/9990;
+  servers:
+  - port: 8080
+  

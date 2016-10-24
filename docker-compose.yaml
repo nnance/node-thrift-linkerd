@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  linkerd:
+    image: buoyantio/linkerd:0.8.2
+    container_name: linkerd
+    ports: ["4140:4140", "9990:9990"]
+    volumes: ["./config:/config:ro"]
+    command: /config/lingerd.yaml
+
+  namerd:
+    image: buoyantio/namerd:0.8.2
+    container_name: namerd
+    ports: ["4100:4100", "4180:4180", "9991:9991"]
+    volumes: ["./config:/config:ro"]
+    command: /config/namerd.yaml
