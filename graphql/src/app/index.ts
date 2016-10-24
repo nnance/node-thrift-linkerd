@@ -4,6 +4,7 @@ import {GraphQLSchema, GraphQLObjectType, GraphQLString} from "graphql";
 
 import * as thrift from "thrift";
 import * as Numbers from "./gen-nodejs/Numbers";
+import * as Calculator from "./gen-nodejs/Calculator";
 
 // Create Thrift client
 const transport = thrift.TBufferedTransport;
@@ -19,14 +20,31 @@ connection.on("error", function(err) {
   console.error(err);
 });
 
+// Create a Numbers client with the connection
+const numbers = thrift.createClient(Numbers, connection);
+
+const calcConnection = thrift.createConnection("localhost", 9091, {
+  max_retries: 10,
+  protocol : protocol,
+  transport : transport,
+});
+
+calcConnection.on("error", function(err) {
+  console.error(err);
+});
+
 // Create a Calculator client with the connection
-const client = thrift.createClient(Numbers, connection);
+const calculator = thrift.createClient(Calculator, calcConnection);
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
         fields: {
             testString: {
-                resolve: client.generate.bind(client),
+                resolve: async (): Promise<number> => {
+                  let nums = await Promise.all([numbers.generate(), numbers.generate()]);
+                  console.dir(nums);
+                  return calculator.add(nums[0], nums[1]);
+                },
                 type: GraphQLString,
             },
         },

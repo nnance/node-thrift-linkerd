@@ -1,5 +1,5 @@
 {
-  "name": "graphql",
+  "name": "svc-calculator",
   "version": "1.0.0",
   "description": "Calculator Thrift App",
   "main": "./dist/index.js",
@@ -7,29 +7,21 @@
     "build": "tsc",
     "start": "node ./dist/index.js",
     "dev": "nodemon ./dist/index.js",
-    "thrift": "npm run thrift:numbers && npm run thrift:calculator",
-    "thrift:numbers": "thrift -r --gen js:node -o ./dist ../svc-numbers/src/thrift/numbers.thrift",
-    "thrift:calculator": "thrift -r --gen js:node -o ./dist ../svc-calculator/src/thrift/calculator.thrift",
+    "thrift": "thrift -r --gen js:node -o ./dist ./src/thrift/calculator.thrift",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "graphql",
     "thrift"
   ],
   "author": "Nick Nance",
   "license": "ISC",
   "dependencies": {
-    "graphql": "^0.7.2",
-    "graphql-server-hapi": "^0.4.3",
-    "hapi": "^15.2.0",
     "thrift": "^0.9.3"
   },
   "devDependencies": {
-    "@types/hapi": "^13.0.36",
     "@types/node": "^6.0.45",
     "nodemon": "^1.11.0",
     "tslint": "^3.15.1",
-    "typed-graphql": "^1.0.2",
     "typescript": "^2.0.3"
   }
 }

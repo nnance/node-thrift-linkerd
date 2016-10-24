@@ -1,7 +1,7 @@
 {
   "name": "svc-numbers",
   "version": "1.0.0",
-  "description": "Numbers Thrift App",
+  "description": "Random Number Generator Thrift App",
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",
