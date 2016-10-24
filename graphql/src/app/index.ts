@@ -12,8 +12,8 @@ const protocol = thrift.TBinaryProtocol;
 
 const connection = thrift.createConnection("localhost", 9090, {
   max_retries: 10,
-  protocol : protocol,
-  transport : transport,
+  protocol: protocol,
+  transport: transport,
 });
 
 connection.on("error", function(err) {
@@ -25,8 +25,8 @@ const numbers = thrift.createClient(Numbers, connection);
 
 const calcConnection = thrift.createConnection("localhost", 9091, {
   max_retries: 10,
-  protocol : protocol,
-  transport : transport,
+  protocol: protocol,
+  transport: transport,
 });
 
 calcConnection.on("error", function(err) {
@@ -37,19 +37,19 @@ calcConnection.on("error", function(err) {
 const calculator = thrift.createClient(Calculator, calcConnection);
 
 const schema = new GraphQLSchema({
-    query: new GraphQLObjectType({
-        fields: {
-            testString: {
-                resolve: async (): Promise<number> => {
-                  let nums = await Promise.all([numbers.generate(), numbers.generate()]);
-                  console.dir(nums);
-                  return calculator.add(nums[0], nums[1]);
-                },
-                type: GraphQLString,
-            },
+  query: new GraphQLObjectType({
+    fields: {
+      testString: {
+        resolve: async (): Promise<number> => {
+          let nums = await Promise.all([numbers.generate(), numbers.generate()]);
+          console.dir(nums);
+          return calculator.add(nums[0], nums[1]);
         },
-        name: "Query",
-    }),
+        type: GraphQLString,
+      },
+    },
+    name: "Query",
+  }),
 });
 
 // Create a server with a host and port
