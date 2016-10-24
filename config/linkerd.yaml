@@ -6,4 +6,18 @@ routers:
   baseDtab: /http => /$/inet/127.1/9990;
   servers:
   - port: 8080
-  
+
+- protocol: thrift
+  baseDtab: |
+    /thrift/generate => /$/inet/numbers/9090;
+    /thrift/add => /$/inet/calculator/9091;
+  # interpreter:
+  #   kind: io.l5d.namerd
+  #   dst: /$/inet/namerd/4100
+  servers:
+  - port: 8081
+    ip: 0.0.0.0
+    thriftFramed: false
+  client:
+    thriftFramed: false
+  thriftMethodInDst: true

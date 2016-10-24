@@ -10,7 +10,7 @@ import * as Calculator from "./gen-nodejs/Calculator";
 const transport = thrift.TBufferedTransport;
 const protocol = thrift.TBinaryProtocol;
 
-const connection = thrift.createConnection("numbers", 9090, {
+const connection = thrift.createConnection("linkerd", 8081, {
   max_attempts: 10,
   protocol: protocol,
   transport: transport,
@@ -23,7 +23,7 @@ connection.on("error", function(err) {
 // Create a Numbers client with the connection
 const numbers = thrift.createClient(Numbers, connection);
 
-const calcConnection = thrift.createConnection("calculator", 9091, {
+const calcConnection = thrift.createConnection("linkerd", 8081, {
   max_attempts: 10,
   protocol: protocol,
   transport: transport,

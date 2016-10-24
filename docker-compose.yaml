@@ -27,7 +27,7 @@ services:
   linkerd:
     image: buoyantio/linkerd:0.8.2
     container_name: linkerd
-    ports: ["4140:4140", "9990:9990"]
+    ports: ["8081:8081", "9990:9990"]
     volumes: ["./config:/config:ro"]
     command: /config/linkerd.yaml
 
