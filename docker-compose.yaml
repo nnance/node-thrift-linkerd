@@ -1,12 +1,35 @@
 version: '2'
 
 services:
+  graphql:
+    build: graphql/
+    container_name: graphql
+    ports: ["3000:3000"]
+    depends_on:
+      - linkerd
+      - numbers
+      - calculator
+
+  numbers:
+    build: svc-numbers/
+    container_name: numbers
+    ports: ["9090:9090"]
+    depends_on:
+      - linkerd
+
+  calculator:
+    build: svc-calculator/
+    container_name: calculator
+    ports: ["9091:9091"]
+    depends_on:
+      - linkerd
+
   linkerd:
     image: buoyantio/linkerd:0.8.2
     container_name: linkerd
     ports: ["4140:4140", "9990:9990"]
     volumes: ["./config:/config:ro"]
-    command: /config/lingerd.yaml
+    command: /config/linkerd.yaml
 
   namerd:
     image: buoyantio/namerd:0.8.2

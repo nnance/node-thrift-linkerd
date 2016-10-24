@@ -11,5 +11,5 @@ RUN npm install --production
 # Bundle app source
 COPY ./dist/ /usr/src/app/dist/
 
-EXPOSE 9091
+EXPOSE 9090
 CMD node ./dist/index.js
