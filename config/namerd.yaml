@@ -7,8 +7,8 @@ storage:
   namespaces:
     default: |
       /host             => /$/inet/graphql/3000;
-      /host/numbers     => /$/inet/numbers/9090;
-      /host/calculator  => /$/inet/calculator/9091;
+      /thrift/generate  => /$/inet/numbers/9090;
+      /thrift/add       => /$/inet/calculator/9091;
       /http/1.1/*       => /host;
 interfaces:
 - kind: io.l5d.thriftNameInterpreter

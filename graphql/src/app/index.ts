@@ -6,11 +6,19 @@ import * as thrift from "thrift";
 import * as Numbers from "./gen-nodejs/Numbers";
 import * as Calculator from "./gen-nodejs/Calculator";
 
+const graphqlPort = process.env.PORT || 3000;
+const numAddr = splitAddress(process.env.NUMADDR || "localhost:9090");
+const callAddr = splitAddress(process.env.CALCADDR || "localhost:9091");
+
+function splitAddress(address: string): string[] {
+  return address.indexOf(":") > -1 ? address.split(":") : [address];
+}
+
 // Create Thrift client
 const transport = thrift.TBufferedTransport;
 const protocol = thrift.TBinaryProtocol;
 
-const connection = thrift.createConnection("linkerd", 8081, {
+const connection = thrift.createConnection(numAddr[0], numAddr[1] || 80, {
   max_attempts: 10,
   protocol: protocol,
   transport: transport,
@@ -23,7 +31,7 @@ connection.on("error", function(err) {
 // Create a Numbers client with the connection
 const numbers = thrift.createClient(Numbers, connection);
 
-const calcConnection = thrift.createConnection("linkerd", 8081, {
+const calcConnection = thrift.createConnection(callAddr[0], callAddr[1] || 80, {
   max_attempts: 10,
   protocol: protocol,
   transport: transport,
@@ -39,10 +47,9 @@ const calculator = thrift.createClient(Calculator, calcConnection);
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     fields: {
-      testString: {
+      addition: {
         resolve: async (): Promise<number> => {
           let nums = await Promise.all([numbers.generate(), numbers.generate()]);
-          console.dir(nums);
           return calculator.add(nums[0], nums[1]);
         },
         type: GraphQLString,
@@ -54,7 +61,6 @@ const schema = new GraphQLSchema({
 
 // Create a server with a host and port
 const server = new hapi.Server();
-const graphqlPort = 3000;
 
 server.connection({
   host: "0.0.0.0",
@@ -81,5 +87,5 @@ server.register({
 
 server.start(() => {
   console.log(`Server is listen on ${graphqlPort}`);
-  console.log("open browser to http://localhost:3000/");
+  console.log(`open browser to http://localhost:${graphqlPort}/`);
 });

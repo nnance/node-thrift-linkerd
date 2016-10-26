@@ -8,9 +8,6 @@
         "sourceMap": true,
         "rootDir": "src/app/",
         "outDir": "dist/",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
         "rootDirs": [
           "src/app",
           "src/typings"
