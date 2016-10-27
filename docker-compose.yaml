@@ -36,8 +36,12 @@ services:
     image: buoyantio/linkerd:0.8.2
     container_name: linkerd
     ports: ["8081:8081", "9990:9990"]
-    volumes:
-    - ./config:/config:ro
-    - ./config/names:/names
-    - ./config/names:/thrift
+    volumes: ["./config:/config:ro"]
     command: /config/linkerd.yaml
+
+  namerd:
+    image: buoyantio/namerd:0.8.2
+    container_name: namerd
+    ports: ["4100:4100", "4180:4180", "9991:9991"]
+    volumes: ["./config:/config:ro"]
+    command: /config/namerd.yaml

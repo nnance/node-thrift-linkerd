@@ -1,18 +1,16 @@
 admin:
   port: 9990
 
-namers:
-- kind: io.l5d.fs
-  prefix: /thrift
-  rootDir: /names
-
 routers:
 - protocol: http
-  baseDtab: /http => /$/inet/127.1/9990
+  baseDtab: /http => /$/inet/127.1/9990;
   servers:
   - port: 8080
 
 - protocol: thrift
+  interpreter:
+    kind: io.l5d.namerd
+    dst: /$/inet/namerd/4100
   servers:
   - port: 8081
     ip: 0.0.0.0
