@@ -11,5 +11,4 @@ RUN npm install --production
 # Bundle app source
 COPY ./dist/ /usr/src/app/dist/
 
-EXPOSE 3000
 CMD node ./dist/index.js
