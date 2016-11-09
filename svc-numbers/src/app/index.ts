@@ -1,5 +1,5 @@
-import * as thrift from "thrift";
-import * as Numbers from "./gen-nodejs/Numbers";
+const thrift = require("thrift");
+import * as Numbers from "../managed/Numbers";
 
 const port = process.env.PORT || 9090;
 

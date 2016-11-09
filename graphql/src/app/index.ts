@@ -2,9 +2,9 @@ import * as hapi from "hapi";
 import { graphqlHapi, graphiqlHapi } from "graphql-server-hapi";
 import {GraphQLSchema, GraphQLObjectType, GraphQLString} from "graphql";
 
-import * as thrift from "thrift";
-import * as Numbers from "./gen-nodejs/Numbers";
-import * as Calculator from "./gen-nodejs/Calculator";
+const thrift = require("thrift");
+import * as Numbers from "../managed/Numbers";
+import * as Calculator from "../managed/Calculator";
 
 const graphqlPort = process.env.PORT || 3000;
 const numAddr = splitAddress(process.env.NUMADDR || "localhost:9090");

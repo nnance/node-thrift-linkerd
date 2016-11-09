@@ -6,13 +6,12 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "rootDir": "src/app/",
+        "rootDir": "src/",
         "outDir": "dist/",
-        "rootDirs": [
-          "src/app",
-          "src/typings"
+        "types": [
+          "@types/node",
+          "@types/mocha"
         ]
-
     },
     "exclude": [
         "node_modules",

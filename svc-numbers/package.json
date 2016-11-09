@@ -2,11 +2,11 @@
   "name": "svc-numbers",
   "version": "1.0.0",
   "description": "Random Number Generator Thrift App",
-  "main": "./dist/index.js",
+  "main": "./dist/app/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/index.js",
-    "dev": "nodemon ./dist/index.js",
+    "start": "node ./dist/app/index.js",
+    "dev": "nodemon ./dist/app/index.js",
     "thrift": "thrift -r --gen js:node -o ./dist ./src/thrift/numbers.thrift",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

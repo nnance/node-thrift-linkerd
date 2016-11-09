@@ -1,9 +1,9 @@
-import * as thrift from "thrift";
-import * as Numbers from "./gen-nodejs/Calculator";
+const thrift = require("thrift");
+import * as Calculator from "../managed/Calculator";
 
 const port = process.env.PORT || 9091;
 
-const server = thrift.createServer(Numbers, {
+const server = thrift.createServer(Calculator, {
   add: function(x: number, y: number, result) {
     result(null, x + y);
   },
