@@ -13,4 +13,4 @@ node_modules
 dist
 
 # Thrift artifacts
-# */src/managed
+*/src/managed

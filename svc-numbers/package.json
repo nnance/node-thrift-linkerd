@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/node": "^6.0.45",
     "nodemon": "^1.11.0",
-    "thrift-typescript": "file:///Users/nicknance/dev/thrift/thrift-typescript",
+    "thrift-typescript": "^0.1.0",
     "tslint": "^3.15.1",
     "typescript": "^2.0.3"
   }
