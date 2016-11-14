@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node ./dist/app/index.js",
     "dev": "nodemon ./dist/app/index.js",
-    "thrift": "thrift -r --gen js:node -o ./dist ./src/thrift/numbers.thrift",
+    "thrift": "thrift-typescript -o ./src/managed ./src/thrift/numbers.thrift",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^6.0.45",
     "nodemon": "^1.11.0",
+    "thrift-typescript": "file:///Users/nicknance/dev/thrift/thrift-typescript",
     "tslint": "^3.15.1",
     "typescript": "^2.0.3"
   }
