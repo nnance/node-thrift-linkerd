@@ -9,22 +9,6 @@ const Q = thrift.Q;
 
 // HELPER FUNCTIONS AND STRUCTURES
 class NumbersGenerateArgs {
-  // public x: number;
-  // public y: number;
-
-  // constructor(args?) {
-  //   this.x = null;
-  //   this.y = null;
-  //   if (args) {
-  //     if (args.x !== undefined && args.x !== null) {
-  //       this.x = args.x;
-  //     }
-  //     if (args.y !== undefined && args.y !== null) {
-  //       this.y = args.y;
-  //     }
-  //   }
-  // }
-
   public read(input) {
     input.readStructBegin();
     while (true) {
@@ -35,24 +19,7 @@ class NumbersGenerateArgs {
       if (ftype === Thrift.Type.STOP) {
         break;
       }
-      // switch (fid) {
-      //   case 1:
-      //     if (ftype === Thrift.Type.I32) {
-      //       this.x = input.readI32();
-      //     } else {
-      //       input.skip(ftype);
-      //     }
-      //     break;
-      //   case 2:
-      //     if (ftype === Thrift.Type.I32) {
-      //       this.y = input.readI32();
-      //     } else {
-      //       input.skip(ftype);
-      //     }
-      //     break;
-      //   default:
       input.skip(ftype);
-      // }
       input.readFieldEnd();
     }
     input.readStructEnd();
@@ -61,16 +28,6 @@ class NumbersGenerateArgs {
 
   public write(output) {
     output.writeStructBegin("NumbersGenerateArgs");
-    // if (this.x !== null && this.x !== undefined) {
-    //   output.writeFieldBegin("x", Thrift.Type.I32, 1);
-    //   output.writeI32(this.x);
-    //   output.writeFieldEnd();
-    // }
-    // if (this.y !== null && this.y !== undefined) {
-    //   output.writeFieldBegin("y", Thrift.Type.I32, 2);
-    //   output.writeI32(this.y);
-    //   output.writeFieldEnd();
-    // }
     output.writeFieldStop();
     output.writeStructEnd();
     return;

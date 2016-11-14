@@ -10,8 +10,7 @@
         "outDir": "dist/",
         "baseUrl": "./node_modules",
         "types": [
-          "@types/node",
-          "@types/mocha"
+          "@types/node"
         ]
     },
     "exclude": [
