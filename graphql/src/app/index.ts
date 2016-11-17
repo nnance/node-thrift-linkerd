@@ -4,6 +4,7 @@ import {GraphQLSchema, GraphQLObjectType, GraphQLString} from "graphql";
 
 const thrift = require("thrift");
 import * as Numbers from "../managed/Numbers";
+import * as NumbersTypes from "../managed/Numbers_types";
 import * as Calculator from "../managed/Calculator";
 
 const graphqlPort = process.env.PORT || 3000;
@@ -49,8 +50,8 @@ const schema = new GraphQLSchema({
     fields: {
       addition: {
         resolve: async (): Promise<number> => {
-          let nums = await Promise.all([numbers.generate(), numbers.generate()]);
-          return calculator.add(nums[0], nums[1]);
+          let nums: NumbersTypes.GenerateResponse[] = await Promise.all([numbers.generate(), numbers.generate()]);
+          return calculator.add(nums[0].id, nums[1].id);
         },
         type: GraphQLString,
       },

@@ -1,5 +1,6 @@
 const thrift = require("thrift");
 import * as Numbers from "../managed/Numbers";
+import { GenerateResponse } from "../managed/Numbers_types";
 
 const port = process.env.PORT || 9090;
 
@@ -9,7 +10,9 @@ const randomizer = (bottom, top) => {
 
 const server = thrift.createServer(Numbers, {
   generate: (result) => {
-    result(null, randomizer(1, 10));
+    result(null, new GenerateResponse({
+      id: randomizer(1, 10),
+    }));
   },
 });
 
