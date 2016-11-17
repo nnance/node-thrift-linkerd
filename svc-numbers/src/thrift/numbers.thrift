@@ -1,11 +1,13 @@
 namespace java com.twitter.finagle.example.thriftjava
 #@namespace scala com.twitter.finagle.example.thriftscala
 
-struct GenerateResponse {
-    1: required i32 id,
+struct MultipleResponse {
+    1: required i32 first,
+    2: required i32 second,
 }
 
 
 service Numbers {
-  GenerateResponse generate();
+  i32 generateSingle();
+  MultipleResponse generateMultiple();
 }

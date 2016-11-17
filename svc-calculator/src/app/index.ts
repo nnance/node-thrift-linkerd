@@ -7,6 +7,9 @@ const server = thrift.createServer(Calculator, {
   add: function(x: number, y: number, result) {
     result(null, x + y);
   },
+  multiply: function(x: number, y: number, result) {
+    result(null, x * y);
+  },
 });
 
 server.listen(port);
