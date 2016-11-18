@@ -6,7 +6,6 @@ struct MultipleResponse {
     2: required i32 second,
 }
 
-
 service Numbers {
   i32 generateSingle();
   MultipleResponse generateMultiple();
