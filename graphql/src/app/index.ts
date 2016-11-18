@@ -6,6 +6,7 @@ const thrift = require("thrift");
 import * as Numbers from "../managed/Numbers";
 import {MultipleResponse} from "../managed/Numbers_types";
 import * as Calculator from "../managed/Calculator";
+import {MultiplyRequest} from "../managed/Calculator_types";
 
 const graphqlPort = process.env.PORT || 3000;
 const numAddr = splitAddress(process.env.NUMADDR || "localhost:9090");
@@ -58,7 +59,11 @@ const schema = new GraphQLSchema({
       multiply: {
         resolve: async (): Promise<number> => {
           let nums: number[] = await Promise.all([numbers.generateSingle(), numbers.generateSingle()]);
-          return calculator.multiply(nums[0], nums[1]);
+          const request = new MultiplyRequest({
+            x: nums[0],
+            y: nums[1],
+          });
+          return calculator.multiply(request);
         },
         type: GraphQLString,
       },
