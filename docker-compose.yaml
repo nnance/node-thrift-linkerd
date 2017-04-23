@@ -7,8 +7,8 @@ services:
     environment:
       - PORT=9090
     ports: ["9090:9090"]
-    # depends_on:
-    #   - linkerd
+    depends_on:
+      - linkerd
 
   calculator:
     build: svc-calculator/
@@ -16,8 +16,8 @@ services:
     environment:
       - PORT=9091
     ports: ["9091:9091"]
-    # depends_on:
-    #   - linkerd
+    depends_on:
+      - linkerd
 
   graphql:
     build: graphql/
@@ -28,20 +28,20 @@ services:
       - CALCADDR=calculator:9091
     ports: ["3000:3000"]
     depends_on:
-      # - linkerd
+      - linkerd
       - numbers
       - calculator
 
-  # linkerd:
-  #   image: buoyantio/linkerd:0.8.2
-  #   container_name: linkerd
-  #   ports: ["8080:8080", "8081:8081", "9990:9990"]
-  #   volumes: ["./config:/config:ro"]
-  #   command: /config/linkerd.yaml
-  #
-  # namerd:
-  #   image: buoyantio/namerd:0.8.2
-  #   container_name: namerd
-  #   ports: ["4100:4100", "4180:4180", "9991:9991"]
-  #   volumes: ["./config:/config:ro"]
-  #   command: /config/namerd.yaml
+  linkerd:
+    image: buoyantio/linkerd:0.8.2
+    container_name: linkerd
+    ports: ["8080:8080", "8081:8081", "9990:9990"]
+    volumes: ["./config:/config:ro"]
+    command: /config/linkerd.yaml
+
+  namerd:
+    image: buoyantio/namerd:0.8.2
+    container_name: namerd
+    ports: ["4100:4100", "4180:4180", "9991:9991"]
+    volumes: ["./config:/config:ro"]
+    command: /config/namerd.yaml

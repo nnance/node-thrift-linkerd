@@ -16,7 +16,7 @@
   "author": "Nick Nance",
   "license": "ISC",
   "dependencies": {
-    "thrift": "^0.9.3"
+    "thrift": "^0.10.0"
   },
   "devDependencies": {
     "@types/node": "^6.0.45",
