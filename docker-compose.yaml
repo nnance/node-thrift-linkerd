@@ -24,13 +24,13 @@ services:
     container_name: graphql
     environment:
       - PORT=3000
-      - NUMADDR=numbers:9090
-      - CALCADDR=calculator:9091
+      - NUMADDR=linkerd:8081
+      - CALCADDR=linkerd:8081
     ports: ["3000:3000"]
     depends_on:
       - linkerd
-      - numbers
-      - calculator
+      # - numbers
+      # - calculator
 
   linkerd:
     image: buoyantio/linkerd:0.8.2

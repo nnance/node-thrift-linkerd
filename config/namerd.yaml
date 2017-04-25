@@ -6,10 +6,11 @@ storage:
   kind: io.l5d.inMemory
   namespaces:
     default: |
-      /host             => /$/inet/graphql/3000;
-      /thrift/generate  => /$/inet/numbers/9090;
-      /thrift/add       => /$/inet/calculator/9091;
-      /http/1.1/*       => /host;
+      /host                     => /$/inet/graphql/3000;
+      /thrift/generateMultiple  => /$/inet/numbers/9090;
+      /thrift/generateSingle    => /$/inet/numbers/9090;
+      /thrift/add               => /$/inet/calculator/9091;
+      /http/1.1/*               => /host;
 interfaces:
 - kind: io.l5d.thriftNameInterpreter
   ip: 0.0.0.0

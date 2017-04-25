@@ -26,3 +26,24 @@ Based on the requirements established above, I selected the following stack for 
 * **Namerd** - Which provides service discovery.  Though this project uses a hardcoded configuration, it is easily configurable to use other services like Zookeeper or Consul.
 
 * **GraphQL** - The project includes a [GraphQL](http://graphql.org) Server combined with [Graphiql](https://github.com/graphql/graphiql) to provide an in-browser IDE for exploring the API.
+
+## Getting Started
+
+The entire project can be easily started with docker compose
+
+```sh
+$ docker-compose build
+$ docker-compose run
+```
+You can test that it works with the following GraphQL request
+
+```
+curl http://localhost:3000/graphql?query=%7B%0A%20%20addition%0A%7D
+```
+
+Monitor traffice with the LinkerD Admin
+
+```
+open http://localhost:9990
+```
+

@@ -20,50 +20,56 @@ function splitAddress(address: string): string[] {
 const transport = thrift.TBufferedTransport;
 const protocol = thrift.TBinaryProtocol;
 
-const connection = thrift.createConnection(numAddr[0], numAddr[1] || 80, {
-  max_attempts: 10,
-  protocol: protocol,
-  transport: transport,
-});
+const createNumberClient = () => {
+  const connection = thrift.createConnection(numAddr[0], numAddr[1] || 80, {
+    max_attempts: 10,
+    protocol: protocol,
+    transport: transport,
+  });
 
-connection.on("error", function(err) {
-  console.error(err);
-});
+  connection.on("error", function(err) {
+    console.error(err);
+  });
 
-// Create a Numbers client with the connection
-const numbers = thrift.createClient(Numbers, connection);
+  return thrift.createClient(Numbers, connection);
+}
 
-const calcConnection = thrift.createConnection(callAddr[0], callAddr[1] || 80, {
-  max_attempts: 10,
-  protocol: protocol,
-  transport: transport,
-});
+const createCalcClient = () => {
+  const connection = thrift.createConnection(callAddr[0], callAddr[1] || 80, {
+    max_attempts: 10,
+    protocol: protocol,
+    transport: transport,
+  });
 
-calcConnection.on("error", function(err) {
-  console.error(err);
-});
+  connection.on("error", function(err) {
+    console.error(err);
+  });
 
-// Create a Calculator client with the connection
-const calculator = thrift.createClient(Calculator, calcConnection);
+  return thrift.createClient(Calculator, connection);
+}
+
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     fields: {
       addition: {
         resolve: async (): Promise<number> => {
-          let nums: MultipleResponse = await numbers.generateMultiple();
-          return calculator.add(nums.first, nums.second);
+          let nums: MultipleResponse = await createNumberClient().generateMultiple();
+          return createCalcClient().add(nums.first, nums.second);
         },
         type: GraphQLString,
       },
       multiply: {
         resolve: async (): Promise<number> => {
-          let nums: number[] = await Promise.all([numbers.generateSingle(), numbers.generateSingle()]);
+          let nums: number[] = await Promise.all([
+            createNumberClient().generateSingle(),
+            createNumberClient().generateSingle()
+          ]);
           const request = new MultiplyRequest({
             x: nums[0],
             y: nums[1],
           });
-          return calculator.multiply(request);
+          return createCalcClient().multiply(request);
         },
         type: GraphQLString,
       },
